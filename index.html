@@ -521,7 +521,7 @@
         }, 2600);
       }
 
-      function downloadStoryImage(name, image, fileName) {
+      function downloadStoryImage(name, image, fileName, imagePreview) {
         return new Promise((resolve, reject) => {
           try {
             if (!image.complete || !image.naturalWidth) {
@@ -639,10 +639,12 @@
                     title: "Thiệp mời tốt nghiệp",
                     text: "Thiệp mời tốt nghiệp của Lê Anh Duy",
                   });
+                  imagePreview?.close();
                   resolve("shared");
                   return;
                 } catch (error) {
                   if (error.name === "AbortError") {
+                    imagePreview?.close();
                     resolve("cancelled");
                     return;
                   }
@@ -650,13 +652,20 @@
               }
 
               const url = URL.createObjectURL(blob);
+              if (imagePreview && !imagePreview.closed) {
+                imagePreview.location.replace(url);
+                window.setTimeout(() => URL.revokeObjectURL(url), 300_000);
+                resolve("preview");
+                return;
+              }
+
               const link = document.createElement("a");
               link.href = url;
               link.download = fileName;
               document.body.append(link);
               link.click();
               link.remove();
-              window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+              window.setTimeout(() => URL.revokeObjectURL(url), 60_000);
               resolve("downloaded");
             }, "image/png");
           } catch (error) {
@@ -666,6 +675,10 @@
       }
 
       document.getElementById("save-card").addEventListener("click", async () => {
+        const isIOS =
+          /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+          (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+        const imagePreview = isIOS ? window.open("about:blank", "_blank") : null;
         try {
           const result = await downloadStoryImage(
             guestName,
@@ -673,13 +686,17 @@
             guestName
               ? `thiep-tot-nghiep-${guestName}.png`
               : "thiep-tot-nghiep-le-anh-duy-story.png",
+            imagePreview,
           );
           if (result === "shared") {
-            showToast("Đã chia sẻ ảnh thiệp. Chọn Messenger để gửi cho bạn bè.");
+            showToast("Trong bảng chia sẻ, chọn Lưu hình ảnh hoặc Lưu vào Tệp.");
+          } else if (result === "preview") {
+            showToast("Ảnh thiệp đã mở. Nhấn giữ ảnh để lưu vào Ảnh hoặc Tệp.");
           } else if (result === "downloaded") {
-            showToast("Đã tải ảnh PNG. Đính kèm ảnh này khi nhắn Messenger.");
+            showToast("Đã tải ảnh PNG. Mở mục Tải về để xem hoặc gửi thiệp.");
           }
         } catch (error) {
+          imagePreview?.close();
           showToast(error.message || "Không thể lưu ảnh Story.");
         }
       });

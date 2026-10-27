@@ -32,7 +32,7 @@
       <a class="button secondary" href="tel:+84905042689">Gọi cho Duy</a>
       <button class="button secondary" id="save-card" type="button">Lưu thiệp</button>
     </div>
-    <p class="open-hint">Đang xem trong Messenger? Mở tệp bằng Safari để dùng bản đồ, gọi điện và lưu ảnh. Ảnh thiệp gửi trong tin nhắn không có nút tương tác.</p>
+    <p class="open-hint">Cảm ơn bạn đã luôn yêu thương và đồng hành cùng Duy. Duy rất mong được đón bạn trong ngày vui đặc biệt này!</p>
     <p class="footer">Hẹn gặp g.nartt trong ngày vui!</p>
   </main>
   <script>
@@ -54,9 +54,13 @@
     tick();
     setInterval(tick, 1000);
     document.getElementById("save-card").addEventListener("click", () => {
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+      const imagePreview = isIOS ? window.open("about:blank", "_blank") : null;
       try {
         const image = document.querySelector(".photo");
         if (!image.complete || !image.naturalWidth) {
+          imagePreview?.close();
           window.alert("Ảnh chưa tải xong. Hãy thử lại sau nhé.");
           return;
         }
@@ -135,22 +139,34 @@
                 title: "Thiệp mời tốt nghiệp",
                 text: "Thiệp mời tốt nghiệp của Lê Anh Duy",
               });
+              imagePreview?.close();
               return;
             } catch (error) {
-              if (error.name === "AbortError") return;
+              if (error.name === "AbortError") {
+                imagePreview?.close();
+                return;
+              }
             }
           }
 
           const url = URL.createObjectURL(blob);
+          if (imagePreview && !imagePreview.closed) {
+            imagePreview.location.replace(url);
+            setTimeout(() => URL.revokeObjectURL(url), 300000);
+            window.alert("Ảnh thiệp đã mở. Nhấn giữ ảnh để lưu vào Ảnh hoặc Tệp.");
+            return;
+          }
+
           const link = document.createElement("a");
           link.href = url;
           link.download = fileName;
           document.body.append(link);
           link.click();
           link.remove();
-          setTimeout(() => URL.revokeObjectURL(url), 1000);
+          setTimeout(() => URL.revokeObjectURL(url), 60000);
         }, "image/png");
       } catch (error) {
+        imagePreview?.close();
         window.alert(error.message || "Không thể lưu ảnh Story.");
       }
     });
