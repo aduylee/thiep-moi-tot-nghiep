@@ -456,6 +456,8 @@
       const toast = document.getElementById("toast");
       const inviteParams = new URLSearchParams(window.location.search);
       const guestName = inviteParams.get("to")?.trim();
+      const guestPhoto = inviteParams.get("photo");
+      const portrait = document.querySelector(".portrait");
       let toastTimer;
 
       if (guestName) {
@@ -474,6 +476,21 @@
         gmailUrl.searchParams.set("su", subject);
         gmailUrl.searchParams.set("body", body);
         document.getElementById("rsvpLink").href = gmailUrl.href;
+        portrait.alt = `Ảnh chụp cùng ${guestName}`;
+      }
+
+      if (guestPhoto && /^anh-khach-[a-z0-9-]+\.jpg$/i.test(guestPhoto)) {
+        const defaultPortrait = portrait.getAttribute("src");
+        portrait.addEventListener(
+          "error",
+          () => {
+            portrait.src = defaultPortrait;
+            portrait.alt = "Ảnh chân dung Lê Anh Duy";
+            showToast("Ảnh riêng chưa tải lên được; thiệp đang dùng ảnh chân dung của Duy.");
+          },
+          { once: true },
+        );
+        portrait.src = new URL(guestPhoto, window.location.href).href;
       }
 
       function updateCountdown() {
