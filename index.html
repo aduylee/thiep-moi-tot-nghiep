@@ -335,26 +335,6 @@
         transform: translateY(0);
       }
 
-      .save-preview {
-        margin: 18px 0 0;
-        color: var(--muted);
-        font-size: 0.82rem;
-        line-height: 1.55;
-      }
-
-      .save-preview img {
-        display: block;
-        width: min(100%, 360px);
-        height: auto;
-        margin: 10px auto;
-        touch-action: manipulation;
-      }
-
-      .save-preview a {
-        color: var(--ink);
-        font-weight: 700;
-      }
-
       @keyframes arrive {
         from {
           opacity: 0;
@@ -462,11 +442,6 @@
           Lưu thiệp
         </button>
       </div>
-      <section class="save-preview" id="save-preview" hidden aria-live="polite">
-        <p>Nhấn giữ ảnh bên dưới rồi chọn lưu ảnh. Bạn cũng có thể tải ảnh PNG.</p>
-        <img id="save-preview-image" alt="Ảnh thiệp tốt nghiệp để lưu" />
-        <a id="save-preview-download">Tải ảnh PNG</a>
-      </section>
       <p class="thank-you">
         Cảm ơn bạn đã luôn yêu thương và đồng hành cùng Duy. Duy rất mong được
         đón bạn trong ngày vui đặc biệt này!
@@ -546,8 +521,6 @@
         }, 2600);
       }
 
-      let savePreviewUrl;
-
       function downloadStoryImage(name, image, fileName) {
         return new Promise((resolve, reject) => {
           try {
@@ -576,7 +549,9 @@
             context.fillStyle = "#b8894b";
             context.font = "700 30px 'DM Sans', sans-serif";
             context.fillText(
-              name ? `THÂN MỜI ${name.toLocaleUpperCase("vi-VN")}` : "THÂN MỜI BẠN ĐẾN THAM DỰ",
+              name
+                ? `THÂN MỜI ${name.toLocaleUpperCase("vi-VN")} ĐẾN THAM DỰ`
+                : "THÂN MỜI BẠN ĐẾN THAM DỰ",
               540,
               175,
               850,
@@ -655,15 +630,16 @@
               bytes[index] = data.charCodeAt(index);
             }
             const blob = new Blob([bytes], { type: "image/png" });
-            const showPreview = () => {
-              if (savePreviewUrl) URL.revokeObjectURL(savePreviewUrl);
-              savePreviewUrl = URL.createObjectURL(blob);
-              document.getElementById("save-preview-image").src = savePreviewUrl;
-              const download = document.getElementById("save-preview-download");
-              download.href = savePreviewUrl;
-              download.download = fileName;
-              document.getElementById("save-preview").hidden = false;
-              resolve("preview");
+            const download = () => {
+              const url = URL.createObjectURL(blob);
+              const link = document.createElement("a");
+              link.href = url;
+              link.download = fileName;
+              document.body.append(link);
+              link.click();
+              link.remove();
+              window.setTimeout(() => URL.revokeObjectURL(url), 10000);
+              resolve("downloaded");
             };
 
             if (typeof File === "function" && typeof navigator.share === "function") {
@@ -674,16 +650,24 @@
                     files: [file],
                     title: "Thiệp mời tốt nghiệp",
                     text: "Thiệp mời tốt nghiệp của Lê Anh Duy",
-                  }).then(() => resolve("shared")).catch(showPreview);
+                  }).then(() => resolve("shared")).catch((error) => {
+                    if (error instanceof DOMException && error.name === "AbortError") {
+                      resolve("cancelled");
+                    } else {
+                      download();
+                    }
+                  });
                   return;
                 }
-              } catch {
-                showPreview();
-                return;
+              } catch (error) {
+                if (error instanceof DOMException && error.name === "AbortError") {
+                  resolve("cancelled");
+                  return;
+                }
               }
             }
 
-            showPreview();
+            download();
           } catch (error) {
             reject(error);
           }
@@ -701,8 +685,10 @@
           );
           if (result === "shared") {
             showToast("Trong bảng chia sẻ, chọn Lưu hình ảnh hoặc Lưu vào Tệp.");
-          } else if (result === "preview") {
-            showToast("Ảnh đã hiện bên dưới. Nhấn giữ ảnh để lưu vào thiết bị.");
+          } else if (result === "downloaded") {
+            showToast("Ảnh thiệp đã được tải xuống thiết bị.");
+          } else if (result === "cancelled") {
+            showToast("Bạn đã hủy lưu ảnh thiệp.");
           }
         } catch (error) {
           showToast(error.message || "Không thể lưu ảnh Story.");
