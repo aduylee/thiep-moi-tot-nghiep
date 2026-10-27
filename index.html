@@ -1,4 +1,731 @@
-<!doctype html>
+<!DOCTYPE html><html lang="vi"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Lời mời dự lễ tốt nghiệp của Lê Anh Duy vào Chủ nhật, ngày 01 tháng 11 năm 2026.">
+    <meta name="theme-color" content="#f5f0e7">
+    <title>Thư mời tốt nghiệp · Lê Anh Duy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&amp;family=DM+Sans:wght@400;500;600;700&amp;family=Playfair+Display:wght@500;600;700&amp;display=swap" rel="stylesheet">
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #172d40;
+        --muted: #667580;
+        --gold: #b8894b;
+        --paper: #f5f0e7;
+        --white: #fffdf9;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-width: 320px;
+        min-height: 100vh;
+        margin: 0;
+        padding: 48px 20px;
+        display: grid;
+        place-items: center;
+        overflow-x: hidden;
+        color: var(--ink);
+        background:
+          radial-gradient(ellipse at 10% 12%, #e8dfd0 0, transparent 30%),
+          radial-gradient(ellipse at 90% 86%, #e4e9e5 0, transparent 32%),
+          var(--paper);
+        font-family: "DM Sans", sans-serif;
+      }
+
+      body::before,
+      body::after {
+        position: fixed;
+        z-index: -1;
+        width: 310px;
+        height: 310px;
+        border: 1px solid rgb(184 137 75 / 16%);
+        border-radius: 50%;
+        content: "";
+        pointer-events: none;
+      }
+
+      body::before {
+        top: -190px;
+        right: -120px;
+      }
+
+      body::after {
+        bottom: -210px;
+        left: -120px;
+        width: 390px;
+        height: 390px;
+      }
+
+      .invite {
+        position: relative;
+        width: min(100%, 540px);
+        overflow: hidden;
+        padding: 38px clamp(22px, 7vw, 48px) 32px;
+        border: 1px solid rgb(184 137 75 / 40%);
+        background:
+          linear-gradient(var(--white), var(--white)) padding-box,
+          linear-gradient(145deg, #d8c29e, #fffdf9 40%, #d8c29e) border-box;
+        box-shadow: 0 24px 80px rgb(23 45 64 / 10%);
+        text-align: center;
+        animation: arrive 850ms ease-out both;
+      }
+
+      .poster {
+        position: relative;
+        margin-bottom: 18px;
+      }
+
+      .portrait {
+        display: block;
+        width: 100%;
+        height: clamp(230px, 58vw, 350px);
+        margin: 15px auto 0;
+        border: 1px solid #e5dac8;
+        object-fit: cover;
+        object-position: center 35%;
+        box-shadow: 0 8px 26px rgb(23 45 64 / 12%);
+      }
+
+      .eyebrow {
+        margin: 0 0 8px;
+        color: var(--gold);
+        font-size: 0.64rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+
+      .poster-heading {
+        margin: 0;
+        font-family: "DM Sans", sans-serif;
+        font-size: clamp(1.7rem, 7vw, 2.45rem);
+        font-weight: 700;
+        letter-spacing: 0.045em;
+        line-height: 1.15;
+      }
+
+      .name {
+        margin: 4px 0 0;
+        color: var(--gold);
+        font-family: "Dancing Script", "Playfair Display", cursive;
+        font-size: clamp(1.65rem, 6vw, 2.2rem);
+        font-weight: 600;
+      }
+
+      h1,
+      h2,
+      p {
+        margin-top: 0;
+      }
+
+      .intro {
+        margin: 0 auto 16px;
+        color: var(--muted);
+        font-size: 0.8rem;
+        line-height: 1.6;
+      }
+
+      .event {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+        margin: 0 0 12px;
+        padding: 12px 0 14px;
+        border-top: 1px solid #e7e1d7;
+      }
+
+      .event-item + .event-item {
+        border-left: 1px solid #eee8dd;
+      }
+
+      .event-item.location {
+        text-align: center;
+      }
+
+      .label {
+        display: block;
+        margin-bottom: 7px;
+        color: var(--gold);
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .value {
+        margin: 0;
+        font-size: 0.77rem;
+        font-weight: 600;
+        line-height: 1.55;
+      }
+
+      .location .value {
+        font-weight: 700;
+      }
+
+      .value a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .address {
+        display: block;
+        margin-top: 5px;
+        color: var(--muted);
+        font-size: 0.65rem;
+        font-weight: 400;
+        line-height: 1.45;
+      }
+
+      .address strong {
+        display: block;
+        margin-bottom: 3px;
+        color: var(--ink);
+        font-size: 0.77rem;
+        font-weight: 700;
+      }
+
+      .countdown {
+        margin: 0 0 10px;
+        color: var(--ink);
+        font-size: 0.71rem;
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .countdown strong {
+        color: var(--ink);
+        font-variant-numeric: tabular-nums;
+      }
+
+      .rsvp-link {
+        display: block;
+        margin: 10px 0 18px;
+        color: var(--gold);
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      .rsvp-link:hover {
+        text-decoration: underline;
+      }
+
+      .contact {
+        margin: -9px 0 17px;
+        color: var(--muted);
+        font-size: 0.72rem;
+      }
+
+      .contact a {
+        color: var(--ink);
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .contact a:hover {
+        text-decoration: underline;
+      }
+
+      .thank-you {
+        margin: 18px 0 0;
+        color: var(--muted);
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: 0.9rem;
+        font-style: italic;
+        line-height: 1.55;
+      }
+
+      .actions .button {
+        min-height: 42px;
+        padding: 0 14px;
+        font-size: 0.74rem;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .button {
+        min-height: 46px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 0 18px;
+        border: 1px solid var(--ink);
+        border-radius: 2px;
+        color: white;
+        background: var(--ink);
+        font: inherit;
+        font-size: 0.78rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition:
+          background 160ms ease,
+          color 160ms ease,
+          transform 160ms ease;
+        cursor: pointer;
+      }
+
+      .button:hover {
+        transform: translateY(-2px);
+        color: var(--ink);
+        background: transparent;
+      }
+
+      .button.secondary {
+        color: var(--ink);
+        background: transparent;
+      }
+
+      .button.secondary:hover {
+        color: white;
+        background: var(--ink);
+      }
+
+      .button svg {
+        width: 16px;
+        height: 16px;
+        fill: none;
+        stroke: currentColor;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.7;
+      }
+
+      .toast {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        z-index: 2;
+        padding: 12px 17px;
+        color: #fff;
+        background: var(--ink);
+        box-shadow: 0 8px 24px rgb(23 45 64 / 20%);
+        font-size: 0.82rem;
+        opacity: 0;
+        transform: translateY(8px);
+        transition:
+          opacity 180ms ease,
+          transform 180ms ease;
+        pointer-events: none;
+      }
+
+      .toast.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .save-preview {
+        margin: 18px 0 0;
+        color: var(--muted);
+        font-size: 0.82rem;
+        line-height: 1.55;
+      }
+
+      .save-preview img {
+        display: block;
+        width: min(100%, 360px);
+        height: auto;
+        margin: 10px auto;
+        touch-action: manipulation;
+      }
+
+      .save-preview a {
+        color: var(--ink);
+        font-weight: 700;
+      }
+
+      @keyframes arrive {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 480px) {
+        body {
+          padding: 22px 13px;
+        }
+
+        .invite {
+          padding: 30px 18px 26px;
+        }
+
+        .event {
+          gap: 0;
+        }
+
+        .value {
+          font-size: 0.69rem;
+        }
+
+        .actions {
+          gap: 7px;
+        }
+
+        .actions .button {
+          flex: 1 1 30%;
+          padding-inline: 5px;
+          font-size: 0.66rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="invite">
+      <section class="poster" aria-label="Thiệp mời tốt nghiệp">
+        <p class="eyebrow" id="guestGreeting">Thân mời bạn đến tham dự</p>
+        <h1 class="poster-heading">Lễ tốt nghiệp</h1>
+        <h2 class="name">Lê Anh Duy</h2>
+        <img class="portrait" src="leanhduy.jpg" alt="Ảnh chân dung Lê Anh Duy" width="480" height="600">
+      </section>
+
+      <section class="event" aria-label="Thông tin buổi lễ">
+        <div class="event-item">
+          <span class="label">Thời gian</span>
+          <p class="value">Chủ nhật<br>01.11.2026 · 12:30–16:30</p>
+        </div>
+        <div class="event-item location">
+          <span class="label">Địa điểm</span>
+          <div class="value">
+            Cơ sở 2
+            <span class="address">
+              <strong>Học viện Hàng không Việt Nam</strong>
+              18A/1 Cộng Hòa, Phường Tân Sơn Nhất,<br>
+              Thành phố Hồ Chí Minh
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <p class="countdown" aria-live="polite">
+        <strong id="countdown">Còn 4 ngày · 12 giờ · 15 phút · 14 giây</strong>
+      </p>
+      <a class="rsvp-link" id="rsvpLink" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=leaduy21%40gmail.com&amp;su=RSVP%20l%E1%BB%85%20t%E1%BB%91t%20nghi%E1%BB%87p%20L%C3%AA%20Anh%20Duy&amp;body=M%C3%ACnh%20s%E1%BA%BD%20tham%20d%E1%BB%B1%20l%E1%BB%85%20t%E1%BB%91t%20nghi%E1%BB%87p%20c%E1%BB%A7a%20Duy%20v%C3%A0o%20ng%C3%A0y%2001%2F11%2F2026.">
+        Xác nhận tham dự qua Gmail
+      </a>
+      <p class="contact">Liên hệ: <a href="tel:+84905042689">0905 042 689</a></p>
+
+      <div class="actions">
+        <a class="button" href="https://www.google.com/maps/search/?api=1&amp;query=18A%2F1%20C%E1%BB%99ng%20H%C3%B2a%2C%20Ph%C6%B0%E1%BB%9Dng%20T%C3%A2n%20S%C6%A1n%20Nh%E1%BA%A5t%2C%20Th%C3%A0nh%20ph%E1%BB%91%20H%E1%BB%93%20Ch%C3%AD%20Minh">
+          Mở bản đồ
+        </a>
+        <a class="button secondary" href="tel:+84905042689">Gọi cho Duy</a>
+        <button class="button secondary" id="calendar" type="button">
+          Thêm vào lịch
+        </button>
+        <button class="button secondary" id="save-card" type="button">
+          Lưu thiệp
+        </button>
+      </div>
+      <section class="save-preview" id="save-preview" hidden="" aria-live="polite">
+        <p>Nhấn giữ ảnh bên dưới rồi chọn lưu ảnh. Bạn cũng có thể tải ảnh PNG.</p>
+        <img id="save-preview-image" alt="Ảnh thiệp tốt nghiệp để lưu">
+        <a id="save-preview-download">Tải ảnh PNG</a>
+      </section>
+      <p class="thank-you">
+        Cảm ơn bạn đã luôn yêu thương và đồng hành cùng Duy. Duy rất mong được
+        đón bạn trong ngày vui đặc biệt này!
+      </p>
+    </main>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script>
+      const eventDate = new Date("2026-11-01T12:30:00+07:00");
+      const eventEnd = new Date("2026-11-01T16:30:00+07:00");
+      const countdown = document.getElementById("countdown");
+      const toast = document.getElementById("toast");
+      const inviteParams = new URLSearchParams(window.location.search);
+      const guestName = inviteParams.get("to")?.trim();
+      const guestPhoto = inviteParams.get("photo");
+      const portrait = document.querySelector(".portrait");
+      let toastTimer;
+
+      if (guestName) {
+        document.getElementById("guestGreeting").textContent =
+          `Thân mời ${guestName} đến tham dự`;
+        const subject = `RSVP lễ tốt nghiệp Lê Anh Duy - ${guestName}`;
+        const body = [
+          `Mình sẽ tham dự lễ tốt nghiệp của Duy.`,
+          `Khách mời: ${guestName}.`,
+          "Thời gian: 01/11/2026, 12:30–16:30.",
+        ].join("\n");
+        const gmailUrl = new URL("https://mail.google.com/mail/");
+        gmailUrl.searchParams.set("view", "cm");
+        gmailUrl.searchParams.set("fs", "1");
+        gmailUrl.searchParams.set("to", "leaduy21@gmail.com");
+        gmailUrl.searchParams.set("su", subject);
+        gmailUrl.searchParams.set("body", body);
+        document.getElementById("rsvpLink").href = gmailUrl.href;
+        portrait.alt = `Ảnh chụp cùng ${guestName}`;
+      }
+
+      if (guestPhoto && /^anh-khach-[a-z0-9-]+\.jpg$/i.test(guestPhoto)) {
+        const defaultPortrait = portrait.getAttribute("src");
+        portrait.addEventListener(
+          "error",
+          () => {
+            portrait.src = defaultPortrait;
+            portrait.alt = "Ảnh chân dung Lê Anh Duy";
+            showToast("Ảnh riêng chưa tải lên được; thiệp đang dùng ảnh chân dung của Duy.");
+          },
+          { once: true },
+        );
+        portrait.src = new URL(guestPhoto, window.location.href).href;
+      }
+
+      function updateCountdown() {
+        const now = Date.now();
+        const remaining = eventDate.getTime() - now;
+        if (now >= eventEnd.getTime()) {
+          countdown.textContent = "Buổi lễ đã khép lại, cảm ơn bạn!";
+          return;
+        }
+        if (remaining <= 0) {
+          countdown.textContent = "Buổi lễ đang diễn ra!";
+          return;
+        }
+
+        const days = Math.floor(remaining / 86_400_000);
+        const hours = Math.floor((remaining % 86_400_000) / 3_600_000);
+        const minutes = Math.floor((remaining % 3_600_000) / 60_000);
+        const seconds = Math.floor((remaining % 60_000) / 1_000);
+        countdown.textContent = `Còn ${days} ngày · ${hours} giờ · ${minutes} phút · ${seconds} giây`;
+      }
+
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add("visible");
+        window.clearTimeout(toastTimer);
+        toastTimer = window.setTimeout(() => {
+          toast.classList.remove("visible");
+        }, 2600);
+      }
+
+      let savePreviewUrl;
+
+      function downloadStoryImage(name, image, fileName) {
+        return new Promise((resolve, reject) => {
+          try {
+            if (!image.complete || !image.naturalWidth) {
+              reject(new Error("Ảnh chưa tải xong. Hãy thử lại sau nhé."));
+              return;
+            }
+
+            const canvas = document.createElement("canvas");
+            canvas.width = 1080;
+            canvas.height = 1920;
+            const context = canvas.getContext("2d");
+            if (!context) {
+              reject(new Error("Không thể tạo ảnh Story trên trình duyệt này."));
+              return;
+            }
+
+            context.fillStyle = "#f5f0e7";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            context.fillStyle = "#fffdf9";
+            context.fillRect(64, 64, 952, 1792);
+            context.strokeStyle = "#d8c29e";
+            context.lineWidth = 2;
+            context.strokeRect(80, 80, 920, 1760);
+            context.textAlign = "center";
+            context.fillStyle = "#b8894b";
+            context.font = "700 30px 'DM Sans', sans-serif";
+            context.fillText(
+              name ? `THÂN MỜI ${name.toLocaleUpperCase("vi-VN")}` : "THÂN MỜI BẠN ĐẾN THAM DỰ",
+              540,
+              175,
+              850,
+            );
+            context.fillStyle = "#172d40";
+            context.font = "700 68px 'DM Sans', sans-serif";
+            context.fillText("LỄ TỐT NGHIỆP", 540, 275);
+            if (name) {
+              context.fillStyle = "#b8894b";
+              context.font = "600 50px 'Dancing Script', cursive";
+              context.fillText(name, 540, 355, 850);
+            } else {
+              context.fillStyle = "#b8894b";
+              context.font = "600 48px 'Dancing Script', cursive";
+              context.fillText("Lê Anh Duy", 540, 355);
+            }
+
+            const photoX = 140;
+            const photoY = 410;
+            const photoWidth = 800;
+            const photoHeight = 760;
+            const scale = Math.max(
+              photoWidth / image.naturalWidth,
+              photoHeight / image.naturalHeight,
+            );
+            const cropWidth = photoWidth / scale;
+            const cropHeight = photoHeight / scale;
+            const cropX = (image.naturalWidth - cropWidth) / 2;
+            const cropY = (image.naturalHeight - cropHeight) / 2;
+            context.drawImage(
+              image,
+              cropX,
+              cropY,
+              cropWidth,
+              cropHeight,
+              photoX,
+              photoY,
+              photoWidth,
+              photoHeight,
+            );
+
+            context.fillStyle = "#b8894b";
+            context.font = "700 30px 'DM Sans', sans-serif";
+            context.fillText("THỜI GIAN", 330, 1260);
+            context.fillText("ĐỊA ĐIỂM", 750, 1260);
+            context.strokeStyle = "#d8c29e";
+            context.lineWidth = 2;
+            context.beginPath();
+            context.moveTo(540, 1225);
+            context.lineTo(540, 1440);
+            context.stroke();
+
+            context.fillStyle = "#172d40";
+            context.font = "600 34px 'DM Sans', sans-serif";
+            context.fillText("CHỦ NHẬT", 330, 1320);
+            context.fillText("01.11.2026 · 12:30–16:30", 330, 1370, 390);
+            context.fillText("CƠ SỞ 2", 750, 1320);
+            context.font = "700 27px 'DM Sans', sans-serif";
+            context.fillText("Học viện Hàng không Việt Nam", 750, 1370, 390);
+            context.font = "400 24px 'DM Sans', sans-serif";
+            context.fillText("18A/1 Cộng Hòa, TP. Hồ Chí Minh", 750, 1415, 390);
+
+            context.fillStyle = "#b8894b";
+            context.font = "700 30px 'DM Sans', sans-serif";
+            context.fillText("XÁC NHẬN THAM DỰ", 540, 1535);
+            context.fillStyle = "#172d40";
+            context.font = "600 32px 'DM Sans', sans-serif";
+            context.fillText("Liên hệ: 0905 042 689", 540, 1600);
+            context.fillStyle = "#667580";
+            context.font = "italic 34px 'Playfair Display', Georgia, serif";
+            context.fillText("Hẹn gặp bạn trong ngày vui!", 540, 1720);
+
+            const data = atob(canvas.toDataURL("image/png").split(",")[1]);
+            const bytes = new Uint8Array(data.length);
+            for (let index = 0; index < data.length; index += 1) {
+              bytes[index] = data.charCodeAt(index);
+            }
+            const blob = new Blob([bytes], { type: "image/png" });
+            const showPreview = () => {
+              if (savePreviewUrl) URL.revokeObjectURL(savePreviewUrl);
+              savePreviewUrl = URL.createObjectURL(blob);
+              document.getElementById("save-preview-image").src = savePreviewUrl;
+              const download = document.getElementById("save-preview-download");
+              download.href = savePreviewUrl;
+              download.download = fileName;
+              document.getElementById("save-preview").hidden = false;
+              resolve("preview");
+            };
+
+            if (typeof File === "function" && typeof navigator.share === "function") {
+              const file = new File([blob], fileName, { type: "image/png" });
+              try {
+                if (navigator.canShare?.({ files: [file] })) {
+                  navigator.share({
+                    files: [file],
+                    title: "Thiệp mời tốt nghiệp",
+                    text: "Thiệp mời tốt nghiệp của Lê Anh Duy",
+                  }).then(() => resolve("shared")).catch(showPreview);
+                  return;
+                }
+              } catch {
+                showPreview();
+                return;
+              }
+            }
+
+            showPreview();
+          } catch (error) {
+            reject(error);
+          }
+        });
+      }
+
+      document.getElementById("save-card").addEventListener("click", async () => {
+        try {
+          const result = await downloadStoryImage(
+            guestName,
+            document.querySelector(".portrait"),
+            guestName
+              ? `thiep-tot-nghiep-${guestName}.png`
+              : "thiep-tot-nghiep-le-anh-duy-story.png",
+          );
+          if (result === "shared") {
+            showToast("Trong bảng chia sẻ, chọn Lưu hình ảnh hoặc Lưu vào Tệp.");
+          } else if (result === "preview") {
+            showToast("Ảnh đã hiện bên dưới. Nhấn giữ ảnh để lưu vào thiết bị.");
+          }
+        } catch (error) {
+          showToast(error.message || "Không thể lưu ảnh Story.");
+        }
+      });
+
+      document.getElementById("calendar").addEventListener("click", () => {
+        const ics = [
+          "BEGIN:VCALENDAR",
+          "VERSION:2.0",
+          "PRODID:-//Le Anh Duy//Graduation Invitation//VI",
+          "BEGIN:VEVENT",
+          "UID:graduation-le-anh-duy-20261101@invitation",
+          "DTSTAMP:20261027T000000Z",
+          "DTSTART;TZID=Asia/Ho_Chi_Minh:20261101T123000",
+          "DTEND;TZID=Asia/Ho_Chi_Minh:20261101T163000",
+          "SUMMARY:Lễ tốt nghiệp của Lê Anh Duy",
+          "LOCATION:18A/1 Cộng Hòa, Phường Tân Sơn Nhất, Thành phố Hồ Chí Minh",
+          "DESCRIPTION:Lễ tốt nghiệp của Lê Anh Duy từ 12:30 đến 16:30 tại Học viện Hàng không Việt Nam, Cơ sở 2.",
+          "END:VEVENT",
+          "END:VCALENDAR",
+        ].join("\r\n");
+        const file = new Blob([ics], { type: "text/calendar;charset=utf-8" });
+        const url = URL.createObjectURL(file);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "thu-moi-tot-nghiep-le-anh-duy.ics";
+        document.body.append(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(url);
+        showToast("Đã tải lời mời để thêm vào lịch.");
+      });
+
+      updateCountdown();
+      window.setInterval(updateCountdown, 1_000);
+    </script>
+  
+
+</body></html><!doctype html>
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
